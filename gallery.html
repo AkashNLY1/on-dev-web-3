@@ -369,40 +369,45 @@
     </div>
 
     <script src="js/main.js"></script>
-    <script src="js/lightbox.js"></script>
-    <script>
-        // Gallery filter functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const galleryItems = document.querySelectorAll('.gallery-item');
+<script src="js/lightbox.js"></script>
+<script>
+    // Gallery filter functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
 
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    const filter = this.getAttribute('data-filter');
-                    
-                    galleryItems.forEach(item => {
-                        if (filter === 'all' || item.classList.contains(filter)) {
-                            item.style.display = 'block';
-                            setTimeout(() => {
-                                item.style.opacity = '1';
-                                item.style.transform = 'scale(1)';
-                            }, 50);
-                        } else {
-                            item.style.opacity = '0';
-                            item.style.transform = 'scale(0.8)';
-                            setTimeout(() => {
-                                item.style.display = 'none';
-                            }, 300);
-                        }
-                    });
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.style.display = 'block';
+                        // Reinitialize lightbox after filter
+                        setTimeout(() => {
+                            if (window.initializeLightbox) {
+                                window.initializeLightbox();
+                            }
+                        }, 300);
+                    } else {
+                        item.style.display = 'none';
+                    }
                 });
             });
         });
-    </script>
+
+        // Add tabindex for keyboard accessibility
+        galleryItems.forEach(item => {
+            item.setAttribute('tabindex', '0');
+            item.setAttribute('role', 'button');
+            item.setAttribute('aria-label', 'View image: ' + item.querySelector('.gallery-overlay span').textContent);
+        });
+    });
+</script>
 </body>
 </html>
