@@ -24,16 +24,20 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeModals();
     initializeSmoothScrolling();
     initializeRevealAnimations();
+    initializeRoomBooking();
+    initializeGalleryFilters();
 });
 
 // Header functionality
 function initializeHeader() {
-    // Header scroll effect
+    // Header scroll effect (only for desktop)
     function updateHeader() {
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (window.innerWidth > 768) {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         }
 
         // Back to top button visibility
@@ -49,29 +53,52 @@ function initializeHeader() {
     window.addEventListener('scroll', updateHeader);
     updateHeader(); // Initial check
 
-    // Mobile navigation
+    // Mobile navigation with improved close functionality
     if (mobileToggle && mobileNav && mobileNavClose) {
-        mobileToggle.addEventListener('click', () => {
-            mobileNav.classList.add('active');
-            mobileToggle.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-
-        mobileNavClose.addEventListener('click', () => {
+        const closeMobileNav = () => {
             mobileNav.classList.remove('active');
             mobileToggle.classList.remove('active');
-            document.body.style.overflow = '';
+            document.body.classList.remove('no-scroll');
+        };
+
+        const openMobileNav = () => {
+            mobileNav.classList.add('active');
+            mobileToggle.classList.add('active');
+            document.body.classList.add('no-scroll');
+        };
+
+        mobileToggle.addEventListener('click', () => {
+            if (mobileNav.classList.contains('active')) {
+                closeMobileNav();
+            } else {
+                openMobileNav();
+            }
         });
+
+        mobileNavClose.addEventListener('click', closeMobileNav);
 
         // Close mobile nav when clicking on a link
         document.querySelectorAll('.mobile-nav .nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                mobileToggle.classList.remove('active');
-                document.body.style.overflow = '';
-            });
+            link.addEventListener('click', closeMobileNav);
+        });
+
+        // Close mobile nav when clicking outside content
+        mobileNav.addEventListener('click', (e) => {
+            if (e.target === mobileNav) {
+                closeMobileNav();
+            }
+        });
+
+        // Close mobile nav with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                closeMobileNav();
+            }
         });
     }
+
+    // Update header on resize
+    window.addEventListener('resize', updateHeader);
 }
 
 // Hero Slider functionality
@@ -424,9 +451,3 @@ function initializeGalleryFilters() {
         });
     }
 }
-
-// Initialize additional functionality
-document.addEventListener('DOMContentLoaded', function() {
-    initializeRoomBooking();
-    initializeGalleryFilters();
-});
