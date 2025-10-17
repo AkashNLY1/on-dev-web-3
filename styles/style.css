@@ -387,15 +387,68 @@ header.scrolled .mobile-toggle span {
 }
 
 /* Page Header - FIXED */
+/* Page Header - UPDATED with overlay like hero section */
 .page-header {
     padding: 12rem 0 4rem;
-    background: linear-gradient(135deg, rgba(212, 106, 42, 0.05) 0%, rgba(255, 250, 246, 1) 100%);
     text-align: center;
     position: relative;
     overflow: hidden;
+    color: white;
 }
 
-.page-header::before {
+/* Background image with overlay - similar to hero section */
+.page-header[style*="background-image"] {
+    position: relative;
+}
+
+.page-header[style*="background-image"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+    z-index: 1;
+}
+
+.page-header[style*="background-image"] .container {
+    position: relative;
+    z-index: 2;
+}
+
+.page-header h1 {
+    margin-bottom: 1rem;
+    color: var(--accent);
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(51, 51, 51, 0.5);
+}
+
+.page-header p {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* For pages without background images (default state) */
+.page-header:not([style*="background-image"]) {
+    background: linear-gradient(135deg, rgba(212, 106, 42, 0.05) 0%, rgba(255, 250, 246, 1) 100%);
+}
+
+.page-header:not([style*="background-image"]) h1 {
+    color: var(--charcoal);
+}
+
+.page-header:not([style*="background-image"]) p {
+    color: var(--muted);
+}
+
+.page-header:not([style*="background-image"])::before {
     content: '';
     position: absolute;
     top: 0;
@@ -404,24 +457,8 @@ header.scrolled .mobile-toggle span {
     bottom: 0;
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" opacity="0.03"><path fill="%23a97727" d="M0 0h1200v800H0z"/></svg>');
     background-size: cover;
+    z-index: 1;
 }
-
-.page-header h1 {
-    margin-bottom: 1rem;
-    color: var(--charcoal);
-    position: relative;
-    z-index: 2;
-}
-
-.page-header p {
-    font-size: 1.125rem;
-    color: var(--muted);
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-}
-
 /* Hero Section */
 .hero {
     height: 100vh;
@@ -1544,3 +1581,5 @@ header.scrolled .mobile-toggle span {
         opacity: 0;
     }
 }
+
+
