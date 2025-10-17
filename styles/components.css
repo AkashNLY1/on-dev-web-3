@@ -1030,12 +1030,14 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    align-self: center;
 }
 
 .amenity-icon svg {
     width: 20px;
     height: 20px;
     fill: var(--accent);
+    
 }
 
 .amenity-text h4 {
