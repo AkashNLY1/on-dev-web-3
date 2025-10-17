@@ -161,8 +161,8 @@ button {
 
 .btn-secondary {
     background-color: transparent;
-    color: var(--white);
-    border-color: var(--white);
+    color: white;
+    border-color: white;
 }
 
 .btn-secondary:hover {
@@ -203,10 +203,6 @@ button {
 .reveal.in-view {
     opacity: 1;
     transform: translateY(0);
-}
-
-.about-line{
-    color: white;
 }
 
 /* Header & Navigation */
@@ -251,19 +247,6 @@ header.scrolled {
 
 header.scrolled .logo img {
     height: 40px;
-}
-
-.logo-text {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 1.75rem;
-    color: var(--charcoal);
-}
-
-.logo-tagline {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-top: -5px;
 }
 
 .nav-links {
@@ -403,15 +386,40 @@ header.scrolled .mobile-toggle span {
     order: 1;
 }
 
-/* Page Header */
+/* Page Header - FIXED */
 .page-header {
-    padding: 8rem 0 4rem;
+    padding: 12rem 0 4rem;
     background: linear-gradient(135deg, rgba(212, 106, 42, 0.05) 0%, rgba(255, 250, 246, 1) 100%);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" opacity="0.03"><path fill="%23a97727" d="M0 0h1200v800H0z"/></svg>');
+    background-size: cover;
 }
 
 .page-header h1 {
     margin-bottom: 1rem;
+    color: var(--charcoal);
+    position: relative;
+    z-index: 2;
+}
+
+.page-header p {
+    font-size: 1.125rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 /* Hero Section */
@@ -712,6 +720,143 @@ header.scrolled .mobile-toggle span {
     font-weight: 500;
 }
 
+/* Services Preview Section */
+.services-preview-section {
+    background: var(--bg);
+}
+
+.services-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-preview-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform var(--dur-base) var(--easing);
+}
+
+.service-preview-card:hover {
+    transform: translateY(-10px);
+}
+
+.service-preview-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(212, 106, 42, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.service-preview-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--accent);
+}
+
+.service-preview-card h3 {
+    margin-bottom: 1rem;
+}
+
+.service-preview-card p {
+    margin-bottom: 1.5rem;
+}
+
+.service-preview-link {
+    color: var(--accent);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Rooms Preview Section */
+.rooms-preview-section {
+    background: var(--bg);
+}
+
+.rooms-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.room-preview-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform var(--dur-base) var(--easing);
+}
+
+.room-preview-card:hover {
+    transform: translateY(-5px);
+}
+
+.room-preview-image {
+    height: 250px;
+    overflow: hidden;
+}
+
+.room-preview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--easing);
+}
+
+.room-preview-card:hover .room-preview-image img {
+    transform: scale(1.1);
+}
+
+.room-preview-content {
+    padding: 2rem;
+}
+
+.room-preview-content h3 {
+    margin-bottom: 0.5rem;
+}
+
+.room-preview-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.room-preview-price span {
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.room-preview-content p {
+    margin-bottom: 1.5rem;
+}
+
+.room-preview-features {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.room-preview-features span {
+    background: rgba(212, 106, 42, 0.1);
+    color: var(--accent);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
 /* CTA Section */
 .cta-section {
     background: linear-gradient(65deg, var(--accent-dark) 8%, var(--accent) 80%);
@@ -759,15 +904,20 @@ header.scrolled .mobile-toggle span {
 .footer-logo .logo-text {
     color: white;
     margin-bottom: 0.5rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
 .footer-logo .logo-tagline {
     color: rgba(255,255,255,0.7);
+    font-size: 0.875rem;
 }
 
 .footer-section p {
     color: rgba(255,255,255,0.7);
     margin-bottom: 1.5rem;
+    line-height: 1.6;
 }
 
 .social-links {
@@ -806,6 +956,7 @@ header.scrolled .mobile-toggle span {
 .footer-links a {
     color: rgba(255,255,255,0.7);
     transition: color var(--dur-fast) var(--easing);
+    padding: 0.25rem 0;
 }
 
 .footer-links a:hover {
@@ -957,6 +1108,12 @@ header.scrolled .mobile-toggle span {
     color: var(--muted);
     padding: 0.5rem;
     transition: color var(--dur-fast) var(--easing);
+    z-index: 2001;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-close:hover {
@@ -966,93 +1123,6 @@ header.scrolled .mobile-toggle span {
 .modal-title {
     margin-bottom: 2rem;
     color: var(--charcoal);
-}
-
-/* Lightbox */
-.lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.95);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all var(--dur-base) var(--easing);
-    padding: 2rem;
-}
-
-.lightbox.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.lightbox-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    text-align: center;
-}
-
-.lightbox-img {
-    max-width: 100%;
-    max-height: 80vh;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-xl);
-}
-
-.lightbox-caption {
-    color: white;
-    text-align: center;
-    margin-top: 1.5rem;
-    font-size: 1.125rem;
-}
-
-.lightbox-close, .lightbox-prev, .lightbox-next {
-    position: absolute;
-    background: rgba(0,0,0,0.5);
-    color: white;
-    border: none;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background var(--dur-base) var(--easing);
-    backdrop-filter: blur(10px);
-}
-
-.lightbox-close {
-    top: -80px;
-    right: 0;
-}
-
-.lightbox-prev, .lightbox-next {
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.lightbox-prev {
-    left: -80px;
-}
-
-.lightbox-next {
-    right: -80px;
-}
-
-.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
-    background: rgba(0,0,0,0.8);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.lightbox-close:hover {
-    transform: scale(1.1);
 }
 
 /* Form Styles */
@@ -1099,20 +1169,24 @@ header.scrolled .mobile-toggle span {
     min-height: 120px;
 }
 
-/* Mobile Responsive Design */
+/* ============================================= */
+/* MOBILE RESPONSIVE STYLES - FIXED */
+/* ============================================= */
+
 @media (max-width: 768px) {
-    /* Mobile Header */
+    /* Mobile Header - FIXED: Menu button on RIGHT */
     header {
         background: rgba(255, 250, 246, 0.98) !important;
         backdrop-filter: blur(20px);
         box-shadow: var(--shadow);
         padding: 0.75rem 0;
-        height: 65px;
+        height: 60px;
     }
 
     .header-container {
+        display: flex;
         justify-content: space-between;
-        position: relative;
+        align-items: center;
     }
 
     .logo {
@@ -1122,7 +1196,17 @@ header.scrolled .mobile-toggle span {
     }
 
     .logo img {
-        height: 40px !important;
+        height: 35px !important;
+    }
+
+    .nav-links,
+    .nav-cta {
+        display: none;
+    }
+    
+    .mobile-toggle {
+        display: flex;
+        margin-left: auto; /* This pushes it to the right */
     }
 
     .nav-link {
@@ -1136,34 +1220,41 @@ header.scrolled .mobile-toggle span {
     header.scrolled {
         background: rgba(255, 250, 246, 0.98) !important;
         padding: 0.75rem 0;
-        height: 65px;
+        height: 60px;
     }
 
-    .nav-links,
-    .nav-cta {
-        display: none;
+    /* Page Header - FIXED for mobile */
+    .page-header {
+        padding: 8rem 0 3rem;
+        text-align: center;
     }
-    
-    .mobile-toggle {
-        display: flex;
+
+    .page-header h1 {
+        font-size: clamp(2rem, 6vw, 2.5rem);
+        margin-bottom: 1rem;
     }
-    
+
+    .page-header p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
     /* Mobile Hero Section */
     .hero {
         height: 100vh;
         min-height: 600px;
-        padding-top: 165px;
+        padding-top: 60px;
     }
     
     .hero-content {
         text-align: center;
-        padding-top: 2rem;
-        margin-top: 0;
+        padding-top: 1rem;
     }
     
     .hero-heading {
         font-size: clamp(1.75rem, 6vw, 2.5rem);
         margin-bottom: 1rem;
+        padding: 0 1rem;
     }
     
     .hero-text {
@@ -1176,6 +1267,12 @@ header.scrolled .mobile-toggle span {
         justify-content: center;
         gap: 0.75rem;
         margin-bottom: 2rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-cta .btn {
+        width: 200px;
     }
     
     .hero-features {
@@ -1186,48 +1283,122 @@ header.scrolled .mobile-toggle span {
     
     .feature-item {
         font-size: 0.85rem;
-        padding: 0.5rem;
     }
     
     .hero-controls {
         bottom: 2rem;
         padding: 0 1rem;
     }
-    
+
     /* Mobile Sections */
     .section {
         padding: 4rem 0;
     }
-    
+
+    .container {
+        padding: 0 1.25rem;
+    }
+
+    /* Welcome Section */
+    .welcome-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
     .welcome-images {
         height: 300px;
+        order: -1;
     }
-    
+
     .experience-badge {
         position: relative;
         top: 0;
         left: 0;
-        margin-top: 2rem;
+        margin: 2rem auto;
         width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
+        transform: none;
     }
-    
+
     .welcome-stats {
-        justify-content: center;
+        justify-content: space-around;
+        gap: 1.5rem;
     }
-    
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
+    /* Services & Rooms Sections */
+    .services-preview-grid,
+    .rooms-preview-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .service-preview-card,
+    .room-preview-card {
+        padding: 1.5rem;
+    }
+
+    .room-preview-image {
+        height: 200px;
+    }
+
     /* Mobile Footer */
+    .footer {
+        padding: 3rem 0 1.5rem;
+        text-align: left;
+    }
+
     .footer-content {
         grid-template-columns: 1fr;
+        gap: 2.5rem;
     }
-    
+
+    .footer-section {
+        text-align: left;
+    }
+
+    .footer-section h3 {
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    .footer-logo {
+        text-align: left;
+    }
+
+    .social-links {
+        justify-content: flex-start;
+    }
+
     .footer-bottom {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
+        padding-top: 1.5rem;
     }
-    
+
+    .footer-bottom-links {
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    /* Mobile Modals */
+    .modal-content {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
     /* Mobile Floating CTA */
     .floating-cta {
         bottom: 1rem;
@@ -1238,15 +1409,20 @@ header.scrolled .mobile-toggle span {
         width: 50px;
         height: 50px;
     }
-    
-    /* Mobile Forms */
-    .form-row {
-        grid-template-columns: 1fr;
-    }
 }
 
-/* Desktop Styles */
-@media (min-width: 769px) {
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    /* Page Header for Tablet */
+    .page-header {
+        padding: 10rem 0 4rem;
+    }
+
+    /* Desktop Header */
     header {
         background: transparent;
         backdrop-filter: blur(0px);
@@ -1256,68 +1432,84 @@ header.scrolled .mobile-toggle span {
         background: rgba(255, 250, 246, 0.98);
         backdrop-filter: blur(20px);
     }
-}
 
-/* Responsive Design for Tablets */
-@media (max-width: 1024px) {
-    .welcome-grid,
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr 1fr;
+    .nav-links {
         gap: 2rem;
     }
-    
-    .lightbox-prev {
-        left: 20px;
+
+    .nav-link {
+        font-size: 0.9rem;
     }
-    
-    .lightbox-next {
-        right: 20px;
+
+    /* Footer for Tablet */
+    .footer-content {
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 2.5rem;
     }
-    
-    .lightbox-close {
-        top: 20px;
-        right: 20px;
+
+    .footer-section:last-child {
+        grid-column: 1 / -1;
+        margin-top: 2rem;
     }
 }
 
-/* Responsive Design for Small Mobile */
+/* Desktop Styles */
+@media (min-width: 1025px) {
+    /* Desktop Header */
+    header {
+        background: transparent;
+        backdrop-filter: blur(0px);
+    }
+
+    header.scrolled {
+        background: rgba(255, 250, 246, 0.98);
+        backdrop-filter: blur(20px);
+    }
+
+    .nav-links {
+        gap: 2.5rem;
+    }
+}
+
+/* Additional Mobile Fixes */
 @media (max-width: 480px) {
-    .hero {
-        height: 70vh;
-        min-height: 450px;
+    .container {
+        padding: 0 1rem;
     }
-    
-    .hero-cta {
-        flex-direction: column;
-        align-items: center;
+
+    .page-header {
+        padding: 7rem 0 2rem;
     }
-    
-    .hero-features {
+
+    .page-header h1 {
+        font-size: clamp(1.75rem, 6vw, 2.25rem);
+    }
+
+    .page-header p {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
+    }
+
+    .hero-heading {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        padding: 0 0.5rem;
+    }
+
+    .hero-text {
+        padding: 0 0.5rem;
+    }
+
+    .welcome-stats {
         flex-direction: column;
-        align-items: center;
         gap: 1rem;
     }
-    
-    .hero-content {
-        padding-top: 1rem;
+
+    .footer-section {
+        text-align: left;
     }
-    
-    .hero-controls {
-        bottom: 1.5rem;
-    }
-    
-    .services-preview-grid,
-    .rooms-preview-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .modal-content {
-        padding: 2rem 1.5rem;
+
+    .footer-logo {
+        text-align: left;
     }
 }
 
