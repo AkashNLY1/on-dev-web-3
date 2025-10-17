@@ -152,10 +152,13 @@ button {
 }
 
 .btn-secondary {
-    background-color: rgba(255, 255, 255, 0.142);
+    /* background-color: rgba(255, 255, 255, 0.142); */
     /* color: var(--charcoal); */
-    color: white;
+    /* color: white; */
     /* border-color: var(--charcoal); */
+    background-color: transparent;
+    color: var(--white);
+    border-color: var(--white);
 }
 
 .btn-secondary:hover {
